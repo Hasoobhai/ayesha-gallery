@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayesham Ke Naam</title>
+  <style>
+    :root {
+      --pink: #ff6b9d;
+      --light-pink: #ffc0cb;
+      --rose: #8f1438;
+      --blue: #14275c;
+      --green: #174a35;
+      --gold: #ffd700;
+      --bg: #fff5f7;
+      --text: #333333;
+      --shadow: 0 18px 55px rgba(143, 20, 56, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 192, 203, 0.55), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(255, 215, 0, 0.18), transparent 24%),
+        linear-gradient(135deg, #fff5f7 0%, #fff 48%, #ffe6ee 100%);
+      font-family: "Poppins", "Montserrat", "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -60px;
+      width: 18px;
+      height: 18px;
+      transform: rotate(45deg);
+      background: rgba(255, 107, 157, 0.5);
+      animation: floatHeart linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .heart::before { left: -9px; top: 0; }
+    .heart::after { top: -9px; left: 0; }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0) rotate(45deg) scale(0.75); opacity: 0; }
+      12% { opacity: 0.78; }
+      100% { transform: translateY(-112vh) rotate(45deg) scale(1.25); opacity: 0; }
+    }
+
+    header {
+      min-height: 94vh;
+      display: grid;
+      place-items: center;
+      padding: 34px 18px 78px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image: linear-gradient(rgba(143, 20, 56, 0.22), rgba(255, 245, 247, 0.94)), url("assets/photos/photo-01.jpeg");
+      background-size: cover;
+      background-position: center 28%;
+      background-attachment: fixed;
+      transform: scale(1.02);
+    }
+
+    .hero {
+      width: min(1040px, 100%);
+      text-align: center;
+      color: white;
+      padding-top: 10vh;
+      text-shadow: 0 5px 24px rgba(70, 8, 30, 0.45);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.17);
+      backdrop-filter: blur(10px);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    h1, h2, h3 {
+      font-family: "Dancing Script", "Great Vibes", "Brush Script MT", cursive;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: clamp(3.6rem, 12vw, 9rem);
+      line-height: 0.88;
+      animation: fadeUp 1s ease 0.18s both;
+    }
+
+    .typewriter {
+      min-height: 2.4em;
+      max-width: 830px;
+      margin: 26px auto 0;
+      font-size: clamp(1.05rem, 2.8vw, 1.7rem);
+      line-height: 1.55;
+      animation: fadeUp 1s ease 0.35s both;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 1s ease 0.55s both;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 20px;
+      background: linear-gradient(135deg, var(--pink), var(--rose));
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(143, 20, 56, 0.26);
+      text-decoration: none;
+    }
+
+    .btn.secondary {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(10px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section { padding: 82px 18px; }
+    .wrap { width: min(1160px, 100%); margin: 0 auto; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .section-title h2 {
+      color: var(--rose);
+      font-size: clamp(2.7rem, 7vw, 5.4rem);
+    }
+
+    .section-title p {
+      max-width: 720px;
+      margin: 12px auto 0;
+      line-height: 1.8;
+      color: #5f3645;
+      font-size: 1.05rem;
+    }
+
+    .memory-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: -42px;
+      margin-bottom: 48px;
+    }
+
+    .mini-card {
+      padding: 18px 14px;
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 12px 30px rgba(143, 20, 56, 0.1);
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+
+    .mini-card strong {
+      display: block;
+      color: var(--rose);
+      font-size: 1.25rem;
+    }
+
+    .mini-card span {
+      display: block;
+      margin-top: 6px;
+      color: #674153;
+      font-size: 0.88rem;
+    }
+
+    .gallery,
+    .video-grid,
+    .message-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .photo-card,
+    .video-card,
+    .message-card {
+      border-radius: 8px;
+      background: white;
+      border: 2px solid rgba(255, 215, 0, 0.55);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform: translateY(24px);
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .photo-card { cursor: pointer; }
+    .photo-card.visible,
+    .video-card.visible,
+    .message-card.visible,
+    .reveal.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .photo-card:hover,
+    .video-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+      box-shadow: 0 22px 70px rgba(143, 20, 56, 0.26);
+    }
+
+    .photo-frame,
+    .video-frame {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #ffe3eb;
+    }
+
+    .photo-frame img,
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.7s ease, filter 0.4s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.075);
+      filter: saturate(1.06) contrast(1.03);
+    }
+
+    .caption {
+      padding: 16px 16px 18px;
+      line-height: 1.65;
+      color: #5a3443;
+      min-height: 92px;
+    }
+
+    .videos {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 245, 247, 0.9));
+    }
+
+    .video-card .caption { min-height: 118px; }
+    .video-frame video { background: #1c0812; }
+
+    .messages {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 192, 203, 0.28));
+    }
+
+    .message-card {
+      min-height: 210px;
+      padding: 24px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 234, 240, 0.86));
+      position: relative;
+    }
+
+    .message-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 5px;
+      background: linear-gradient(90deg, var(--rose), var(--gold), var(--green));
+    }
+
+    .message-card h3 {
+      color: var(--rose);
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .message-card p {
+      line-height: 1.85;
+      color: #553141;
+      margin: 0;
+    }
+
+    .love-note {
+      margin-top: 46px;
+      padding: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(143, 20, 56, 0.92), rgba(20, 39, 92, 0.86));
+      color: white;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .love-note h3 {
+      color: var(--gold);
+      font-size: clamp(2.1rem, 5vw, 3.6rem);
+    }
+
+    .love-note p {
+      max-width: 820px;
+      margin: 16px auto 0;
+      line-height: 1.9;
+    }
+
+    footer {
+      padding: 34px 18px 118px;
+      text-align: center;
+      color: #623044;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    footer strong { color: var(--rose); }
+
+    .player {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      width: min(360px, calc(100vw - 36px));
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(255, 215, 0, 0.56);
+      box-shadow: 0 18px 48px rgba(68, 12, 31, 0.22);
+      padding: 14px;
+      backdrop-filter: blur(16px);
+    }
+
+    .player-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .song-title { min-width: 0; }
+    .song-title strong {
+      display: block;
+      color: var(--rose);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .song-title span {
+      display: block;
+      font-size: 0.8rem;
+      color: #694354;
+      margin-top: 2px;
+    }
+
+    .player-buttons {
+      display: flex;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--pink), var(--rose));
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(143, 20, 56, 0.22);
+    }
+
+    .volume {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      color: #694354;
+      font-size: 0.85rem;
+    }
+
+    input[type="range"] { width: 100%; accent-color: var(--pink); }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(28, 8, 18, 0.86);
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox.open {
+      display: grid;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-inner {
+      width: min(960px, 100%);
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 2px solid var(--gold);
+      box-shadow: 0 18px 70px rgba(0, 0, 0, 0.42);
+      background: white;
+    }
+
+    .lightbox p {
+      line-height: 1.7;
+      margin: 14px auto 0;
+      max-width: 760px;
+    }
+
+    .close,
+    .nav {
+      position: absolute;
+      border: 0;
+      cursor: pointer;
+      color: white;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+    }
+
+    .close { top: -8px; right: -8px; }
+    .nav { top: 45%; transform: translateY(-50%); }
+    .prev { left: -8px; }
+    .next { right: -8px; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    @media (max-width: 880px) {
+      .gallery,
+      .video-grid,
+      .message-grid { grid-template-columns: 1fr; }
+
+      .memory-strip {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 0;
+      }
+
+      .hero-bg { background-attachment: scroll; }
+      header { min-height: 92vh; }
+      .caption { min-height: auto; }
+    }
+
+    @media (max-width: 520px) {
+      section { padding: 64px 14px; }
+      .memory-strip { grid-template-columns: 1fr; }
+      .hero { padding-top: 8vh; }
+      .typewriter { min-height: 4.8em; }
+      .player { left: 12px; right: 12px; bottom: 12px; width: auto; }
+      .nav { top: auto; bottom: -58px; }
+      .prev { left: 35%; }
+      .next { right: 35%; }
+      .close { top: -54px; right: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <header id="top">
+    <div class="hero-bg"></div>
+    <div class="hero">
+      <div class="eyebrow">Dil se, sirf tumhare liye</div>
+      <h1>Ayesha Rehman Kiani</h1>
+      <p class="typewriter" id="typewriter"></p>
+      <div class="hero-actions">
+        <a class="btn" href="#gallery">Tumhari Tasveerein</a>
+        <a class="btn secondary" href="#videos">Tumhari Videos</a>
+        <a class="btn secondary" href="#messages">Dil Ki Baat</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <div class="memory-strip reveal">
+          <div class="mini-card"><strong>Ayesham</strong><span>Mera sab se pyara naam</span></div>
+          <div class="mini-card"><strong>17 September</strong><span>Tumhara khaas din</span></div>
+          <div class="mini-card"><strong>Centaurus x 2</strong><span>Tumhari hansi wali yaadein</span></div>
+          <div class="mini-card"><strong>Chunks</strong><span>Tumhara favourite taste</span></div>
+          <div class="mini-card"><strong>Dark Red, Blue, Green</strong><span>Tumhare favourite rang</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <h2>Tumhari Photo Gallery</h2>
+          <p>Ayesham, yeh har tasveer tumhari yaad, tumhari hansi, aur mere dil ke us kone ko sambhal kar rakhti hai jahan sirf tum rehti ho.</p>
+        </div>
+        <div class="gallery" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <section class="videos" id="videos">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <h2>Tumhari Video Yaadein</h2>
+          <p>Gulum, kuch pal tasveer se zyada zinda hotay hain. Yeh clips meri favourite moving yaadein hain, jahan tumhari hansi aur tumhara andaaz dil ke aur qareeb aa jata hai.</p>
+        </div>
+        <div class="video-grid" id="videoGrid"></div>
+      </div>
+    </section>
+
+    <section class="messages" id="messages">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <h2>Roman Urdu Mein Dil Ki Baat</h2>
+          <p>Gulum, kuch alfaaz sirf is liye likhe hain ke jab tum inhein parho, tumhein meri mohabbat bilkul qareeb mehsoos ho.</p>
+        </div>
+        <div class="message-grid">
+          <article class="message-card"><h3>Meri Ayesham</h3><p>Tum meri zindagi ka woh hissa ho jahan sukoon bhi hai, pyaar bhi hai, aur woh muskurahat bhi jo bina wajah dil ko halka kar deti hai.</p></article>
+          <article class="message-card"><h3>Gulum</h3><p>Tumhari hansi mere liye kisi dua se kam nahi. Jab tum khush hoti ho, mujhe lagta hai meri poori duniya theek jagah par aa gayi.</p></article>
+          <article class="message-card"><h3>Chashmish</h3><p>Tumhari aankhon mein jo softness hai, us mein main apna kal, apni khushi, aur apni sab se pyari manzil dekhta hoon.</p></article>
+          <article class="message-card"><h3>Induction Chulha</h3><p>Tum meri woh warmth ho jo thandi sochon ko bhi pighla deti hai. Tum paas hoti ho to dil ko ghar jaisa feel hota hai.</p></article>
+          <article class="message-card"><h3>Centaurus Ki Yaad</h3><p>Woh dono dafa Centaurus jana sirf outing nahi thi. Woh meri diary ke woh pages hain jahan tumhari hansi abhi tak fresh hai.</p></article>
+          <article class="message-card"><h3>Tumhare Rang</h3><p>Dark red tumhari depth jaisa, dark blue tumhare sukoon jaisa, aur dark green tumhari zindagi dene wali presence jaisa lagta hai.</p></article>
+          <article class="message-card"><h3>Meri Perfect</h3><p>5.7 qadd, 66kg pyaar, aur itni zyada cuteness ke alfaaz kam par jate hain. Tum meri nazar mein bilkul perfect ho.</p></article>
+        </div>
+        <div class="love-note reveal">
+          <h3>Ayesham, yeh sab tumhare naam</h3>
+          <p>Happy ya normal din, Chunks ho ya Centaurus, hansi ho ya chup, mujhe bas tumhara saath chahiye. Tum meri favourite feeling ho, meri favourite aadat ho, aur meri favourite insaan ho.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Special dedication:</strong> Ayesha Rehman Kiani ke liye, mere dil ki taraf se. Ayesham, Gulum, Induction Chulha, Chashmish - tum hamesha meri sab se pyari kahani raho gi.</p>
+  </footer>
+
+  <div class="player" aria-label="Music player">
+    <div class="player-top">
+      <div class="song-title">
+        <strong>Heeriye Heeriye</strong>
+        <span id="musicStatus">Load ho raha hai...</span>
+      </div>
+      <div class="player-buttons">
+        <button class="icon-btn" id="playBtn" title="Play ya pause">P</button>
+        <button class="icon-btn" id="muteBtn" title="Mute ya unmute">M</button>
+      </div>
+    </div>
+    <div class="volume">
+      <span>Volume</span>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.55" />
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <div class="lightbox-inner">
+      <button class="close" id="closeLightbox" aria-label="Band karo">x</button>
+      <button class="nav prev" id="prevPhoto" aria-label="Pichli tasveer">&lt;</button>
+      <img id="lightboxImage" alt="Ayesham ki tasveer" />
+      <button class="nav next" id="nextPhoto" aria-label="Agli tasveer">&gt;</button>
+      <p id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <audio id="audio" loop preload="auto" autoplay src="assets/song/heeriye.webm"></audio>
+
+  <script>
+    const captions = [
+      "Ayesham, tumhari muskurahat meri subah ka sab se pyara noor hai.",
+      "Gulum, tum paas hoti ho to har lamha gulabi lagta hai.",
+      "Meri Chashmish, tumhari aankhon mein meri poori duniya basti hai.",
+      "Induction Chulha, tumhari warmth se dil hamesha roshan rehta hai.",
+      "Centaurus ki woh hansi ab bhi mere dil mein mehfooz hai.",
+      "Tum dark red jaisi gehri, dark blue jaisi sukoon wali, aur dark green jaisi zindagi ho.",
+      "Chunks se zyada meetha tumhara saath lagta hai.",
+      "17 September meri diary ka sab se khaas din hai.",
+      "5.7 wali meri pyari Ayesham, tum meri nazar mein perfect ho.",
+      "66kg pyaar, nakhray aur meri jaan ka sab se haseen combo.",
+      "Tumhare saath guzra har pal mere liye dua ban jata hai.",
+      "Gulum, tum meri har thakan ka araam ho.",
+      "Chashmish, tum jab dekhti ho to waqt ruk sa jata hai.",
+      "Ayesha Rehman Kiani, naam bhi dil ko dua jaisa lagta hai.",
+      "Do dafa Centaurus, aur dono dafa dil ne sirf tumhein yaad rakha.",
+      "Tumhara saath meri zindagi ka sab se soft corner hai.",
+      "Meri duniya ke rang tum se complete hote hain.",
+      "Tum ho to simple din bhi special ban jata hai.",
+      "Ayesham, tum meri favourite aadat ho.",
+      "Gulum, tumhari hansi meri playlist ka best song hai.",
+      "Har tasveer mein ek kahani hai, aur har kahani mein tum ho.",
+      "Meri Induction Chulha, tum dil ko garam aur rooh ko calm rakhti ho.",
+      "Tum meri dua, meri khushi, aur meri sab se pyaari yaad ho.",
+      "Tumhara naam aata hai to dil khud muskurata hai.",
+      "Har rose, har gold shine, sab tumhari beauty ke samnay halka hai.",
+      "Ayesham, yeh gallery sirf tasveerein nahi, mera dil hai."
+    ];
+
+    const videoCaptions = [
+      "Yeh clip tumhari un choti choti adaaon ki yaad hai jo dil mein baar baar chalti rehti hain.",
+      "Gulum, tumhari movement bhi ek pyaari si poetry lagti hai.",
+      "Ayesham, video mein tumhari presence aur bhi zyada real aur qareeb mehsoos hoti hai.",
+      "Chashmish, yeh pal mere liye save nahi, mehfooz hain.",
+      "Centaurus ho ya koi simple jagah, tum saath ho to scene special ban jata hai.",
+      "Tumhari hansi aur tumhara andaaz, dono meri favourite memory hain.",
+      "Induction Chulha, tum har clip ko warmth aur pyaar se bhar deti ho.",
+      "Yeh video sirf seconds ka hai, magar is mein meri poori feeling hai.",
+      "Ayesham, tumhari har ada dil ko naye siray se pyaar karna sikha deti hai.",
+      "Gulum, yeh moving yaad mere dil mein hamesha loop par rehti hai.",
+      "Tum meri kahani ka sab se pyaara moving frame ho.",
+      "Yeh clip bhi tumhare naam, meri sab se pyari Chashmish."
+    ];
+
+    const photos = Array.from({ length: 26 }, (_, i) => ({
+      src: `assets/photos/photo-${String(i + 1).padStart(2, "0")}.jpeg`,
+      caption: captions[i],
+      name: `Yaad ${i + 1}`
+    }));
+
+    const videos = Array.from({ length: 12 }, (_, i) => ({
+      src: `assets/videos/video-${String(i + 1).padStart(2, "0")}.mp4`,
+      poster: photos[i % photos.length].src,
+      caption: videoCaptions[i],
+      name: `Video Yaad ${i + 1}`
+    }));
+
+    const typeLines = [
+      "Ayesham, tum meri favourite feeling ho.",
+      "Gulum, tumhari hansi meri duniya ka sab se pyara sound hai.",
+      "Chashmish, tumhari aankhon mein mujhe apna ghar milta hai.",
+      "Yeh choti si website sirf tumhare liye, dil se."
+    ];
+
+    const gallery = document.getElementById("galleryGrid");
+    photos.forEach((photo, index) => {
+      const card = document.createElement("article");
+      card.className = "photo-card reveal";
+      card.innerHTML = `<div class="photo-frame"><img loading="lazy" src="${photo.src}" alt="${photo.name}: ${photo.caption}"></div><div class="caption">${photo.caption}</div>`;
+      card.addEventListener("click", () => openLightbox(index));
+      gallery.appendChild(card);
+    });
+
+    const videoGrid = document.getElementById("videoGrid");
+    videos.forEach((video) => {
+      const card = document.createElement("article");
+      card.className = "video-card reveal";
+      card.innerHTML = `<div class="video-frame"><video controls preload="metadata" poster="${video.poster}" playsinline src="${video.src}"></video></div><div class="caption">${video.caption}</div>`;
+      videoGrid.appendChild(card);
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".reveal, .photo-card, .video-card, .message-card").forEach((el, i) => {
+      el.style.transitionDelay = `${Math.min(i * 35, 350)}ms`;
+      revealObserver.observe(el);
+    });
+
+    const tw = document.getElementById("typewriter");
+    let line = 0;
+    let char = 0;
+    let deleting = false;
+
+    function typeLoop() {
+      const text = typeLines[line];
+      tw.textContent = deleting ? text.slice(0, char--) : text.slice(0, char++);
+      if (!deleting && char > text.length + 10) deleting = true;
+      if (deleting && char < 0) {
+        deleting = false;
+        line = (line + 1) % typeLines.length;
+        char = 0;
+      }
+      setTimeout(typeLoop, deleting ? 35 : 70);
+    }
+    typeLoop();
+
+    const hearts = document.getElementById("hearts");
+    for (let i = 0; i < 30; i++) {
+      const h = document.createElement("span");
+      h.className = "heart";
+      h.style.left = `${Math.random() * 100}%`;
+      h.style.animationDuration = `${7 + Math.random() * 8}s`;
+      h.style.animationDelay = `${Math.random() * 8}s`;
+      h.style.opacity = `${0.35 + Math.random() * 0.45}`;
+      h.style.width = h.style.height = `${12 + Math.random() * 14}px`;
+      hearts.appendChild(h);
+    }
+
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("playBtn");
+    const muteBtn = document.getElementById("muteBtn");
+    const volume = document.getElementById("volume");
+    const status = document.getElementById("musicStatus");
+    audio.volume = Number(volume.value);
+
+    function syncPlayer() {
+      playBtn.textContent = audio.paused ? "P" : "II";
+      muteBtn.textContent = audio.muted ? "X" : "M";
+      status.textContent = audio.paused ? "Tap karo, song play ho jayega" : "Pyaar ke saath play ho raha hai";
+    }
+
+    async function tryPlay() {
+      try {
+        await audio.play();
+      } catch (error) {
+        status.textContent = "Browser ne autoplay roka hai, play dabao";
+      }
+      syncPlayer();
+    }
+
+    playBtn.addEventListener("click", () => audio.paused ? tryPlay() : audio.pause());
+    muteBtn.addEventListener("click", () => {
+      audio.muted = !audio.muted;
+      syncPlayer();
+    });
+    volume.addEventListener("input", () => {
+      audio.volume = Number(volume.value);
+      if (audio.volume > 0) audio.muted = false;
+      syncPlayer();
+    });
+    audio.addEventListener("play", syncPlayer);
+    audio.addEventListener("pause", syncPlayer);
+    window.addEventListener("load", tryPlay);
+    document.addEventListener("click", () => {
+      if (audio.paused) tryPlay();
+    }, { once: true });
+
+    document.querySelectorAll("video").forEach((video) => {
+      video.addEventListener("play", () => {
+        if (!audio.paused) audio.volume = Math.min(audio.volume, 0.18);
+      });
+      video.addEventListener("pause", () => {
+        audio.volume = Number(volume.value);
+      });
+      video.addEventListener("ended", () => {
+        audio.volume = Number(volume.value);
+      });
+    });
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    let current = 0;
+
+    function openLightbox(index) {
+      current = index;
+      lightboxImage.src = photos[current].src;
+      lightboxCaption.textContent = photos[current].caption;
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function movePhoto(step) {
+      openLightbox((current + step + photos.length) % photos.length);
+    }
+
+    document.getElementById("closeLightbox").addEventListener("click", closeLightbox);
+    document.getElementById("prevPhoto").addEventListener("click", () => movePhoto(-1));
+    document.getElementById("nextPhoto").addEventListener("click", () => movePhoto(1));
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("open")) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") movePhoto(-1);
+      if (event.key === "ArrowRight") movePhoto(1);
+    });
+  </script>
+</body>
+</html>
