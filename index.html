@@ -120,15 +120,6 @@
       animation: fadeUp 1s ease 0.18s both;
     }
 
-    .typewriter {
-      min-height: 2.4em;
-      max-width: 830px;
-      margin: 26px auto 0;
-      font-size: clamp(1.05rem, 2.8vw, 1.7rem);
-      line-height: 1.55;
-      animation: fadeUp 1s ease 0.35s both;
-    }
-
     .hero-actions {
       margin-top: 34px;
       display: flex;
@@ -281,8 +272,6 @@
       background: rgba(255, 255, 255, 0.5);
     }
 
-    footer strong { color: var(--rose); }
-
     .player {
       position: fixed;
       right: 18px;
@@ -300,24 +289,8 @@
     .player-top {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 12px;
-    }
-
-    .song-title { min-width: 0; }
-    .song-title strong {
-      display: block;
-      color: var(--rose);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .song-title span {
-      display: block;
-      font-size: 0.8rem;
-      color: #694354;
-      margin-top: 2px;
     }
 
     .player-buttons {
@@ -336,6 +309,66 @@
       color: white;
       font-weight: 900;
       box-shadow: 0 10px 20px rgba(143, 20, 56, 0.22);
+      position: relative;
+    }
+
+    .play-icon::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 11px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 12px solid white;
+    }
+
+    .play-icon.is-playing::before,
+    .play-icon.is-playing::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      width: 5px;
+      height: 18px;
+      background: white;
+      border: 0;
+    }
+
+    .play-icon.is-playing::before { left: 12px; }
+    .play-icon.is-playing::after { right: 12px; }
+
+    .mute-icon::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 13px;
+      width: 10px;
+      height: 12px;
+      background: white;
+      clip-path: polygon(0 30%, 42% 30%, 100% 0, 100% 100%, 42% 70%, 0 70%);
+    }
+
+    .mute-icon::after {
+      content: "";
+      position: absolute;
+      right: 9px;
+      top: 11px;
+      width: 8px;
+      height: 16px;
+      border-right: 2px solid white;
+      border-radius: 50%;
+    }
+
+    .mute-icon.is-muted::after {
+      right: 10px;
+      top: 10px;
+      width: 18px;
+      height: 18px;
+      border: 0;
+      border-top: 3px solid white;
+      transform: rotate(45deg);
+      border-radius: 0;
     }
 
     .volume {
@@ -408,9 +441,33 @@
     }
 
     .close { top: -8px; right: -8px; }
+    .close::before,
+    .close::after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 20px;
+      width: 18px;
+      height: 3px;
+      background: white;
+    }
+    .close::before { transform: rotate(45deg); }
+    .close::after { transform: rotate(-45deg); }
     .nav { top: 45%; transform: translateY(-50%); }
     .prev { left: -8px; }
     .next { right: -8px; }
+    .prev::before,
+    .next::before {
+      content: "";
+      position: absolute;
+      top: 14px;
+      width: 14px;
+      height: 14px;
+      border-left: 3px solid white;
+      border-bottom: 3px solid white;
+    }
+    .prev::before { left: 17px; transform: rotate(45deg); }
+    .next::before { right: 17px; transform: rotate(225deg); }
 
     .reveal {
       opacity: 0;
@@ -435,7 +492,6 @@
       section { padding: 64px 14px; }
       .memory-strip { grid-template-columns: 1fr; }
       .hero { padding-top: 8vh; }
-      .typewriter { min-height: 4.8em; }
       .player { left: 12px; right: 12px; bottom: 12px; width: auto; }
       .nav { top: auto; bottom: -58px; }
       .prev { left: 35%; }
@@ -452,7 +508,6 @@
     <div class="hero">
       <div class="eyebrow">Ayesha Rehman Kiani Gallery</div>
       <h1>Ayesha Rehman Kiani</h1>
-      <p class="typewriter" id="typewriter"></p>
       <div class="hero-actions">
         <a class="btn" href="#gallery">Tumhari Tasveerein</a>
         <a class="btn secondary" href="#videos">Tumhari Videos</a>
@@ -476,8 +531,7 @@
     <section id="gallery">
       <div class="wrap">
         <div class="section-title reveal">
-          <h2>Tumhari Photo Gallery</h2>
-          <p>Photos ko outfit aur color vibe ke hisaab se arrange kiya gaya hai, taake same looks side by side nazar aayein.</p>
+          <h2>Tumhari Tasveerein</h2>
         </div>
         <div class="gallery" id="galleryGrid"></div>
       </div>
@@ -486,8 +540,7 @@
     <section class="videos" id="videos">
       <div class="wrap">
         <div class="section-title reveal">
-          <h2>Tumhari Video Yaadein</h2>
-          <p>Videos ko simple player cards mein rakha gaya hai, bina extra text ke.</p>
+          <h2>Tumhari Videos</h2>
         </div>
         <div class="video-grid" id="videoGrid"></div>
       </div>
@@ -495,32 +548,27 @@
   </main>
 
   <footer>
-    <p><strong>Ayesha Rehman Kiani:</strong> Tumhari photos aur videos ek clean gallery mein arrange kar di gayi hain.</p>
+    <p>Ayesham | Gulum | Induction Chulha | Chashmish</p>
   </footer>
 
   <div class="player" aria-label="Music player">
     <div class="player-top">
-      <div class="song-title">
-        <strong>Heeriye Heeriye</strong>
-        <span id="musicStatus">Load ho raha hai...</span>
-      </div>
       <div class="player-buttons">
-        <button class="icon-btn" id="playBtn" title="Play ya pause">P</button>
-        <button class="icon-btn" id="muteBtn" title="Mute ya unmute">M</button>
+        <button class="icon-btn play-icon" id="playBtn" aria-label="Play ya pause"></button>
+        <button class="icon-btn mute-icon" id="muteBtn" aria-label="Mute ya unmute"></button>
       </div>
     </div>
     <div class="volume">
-      <span>Volume</span>
       <input id="volume" type="range" min="0" max="1" step="0.01" value="0.55" />
     </div>
   </div>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
     <div class="lightbox-inner">
-      <button class="close" id="closeLightbox" aria-label="Band karo">x</button>
-      <button class="nav prev" id="prevPhoto" aria-label="Pichli tasveer">&lt;</button>
+      <button class="close" id="closeLightbox" aria-label="Band karo"></button>
+      <button class="nav prev" id="prevPhoto" aria-label="Pichli tasveer"></button>
       <img id="lightboxImage" alt="Ayesham ki tasveer" />
-      <button class="nav next" id="nextPhoto" aria-label="Agli tasveer">&gt;</button>
+      <button class="nav next" id="nextPhoto" aria-label="Agli tasveer"></button>
     </div>
   </div>
 
@@ -537,13 +585,6 @@
       poster: photos[i % photos.length].src,
       name: `Video ${i + 1}`
     }));
-
-    const typeLines = [
-      "Tumhari photos color vibe ke hisaab se arrange hain.",
-      "Pink, white, blue aur dark looks apni apni grouping mein hain.",
-      "Videos simple cards mein rakhi gayi hain.",
-      "Gallery clean aur mobile friendly hai."
-    ];
 
     const gallery = document.getElementById("galleryGrid");
     photos.forEach((photo, index) => {
@@ -576,24 +617,6 @@
       revealObserver.observe(el);
     });
 
-    const tw = document.getElementById("typewriter");
-    let line = 0;
-    let char = 0;
-    let deleting = false;
-
-    function typeLoop() {
-      const text = typeLines[line];
-      tw.textContent = deleting ? text.slice(0, char--) : text.slice(0, char++);
-      if (!deleting && char > text.length + 10) deleting = true;
-      if (deleting && char < 0) {
-        deleting = false;
-        line = (line + 1) % typeLines.length;
-        char = 0;
-      }
-      setTimeout(typeLoop, deleting ? 35 : 70);
-    }
-    typeLoop();
-
     const hearts = document.getElementById("hearts");
     for (let i = 0; i < 30; i++) {
       const h = document.createElement("span");
@@ -610,20 +633,17 @@
     const playBtn = document.getElementById("playBtn");
     const muteBtn = document.getElementById("muteBtn");
     const volume = document.getElementById("volume");
-    const status = document.getElementById("musicStatus");
     audio.volume = Number(volume.value);
 
     function syncPlayer() {
-      playBtn.textContent = audio.paused ? "P" : "II";
-      muteBtn.textContent = audio.muted ? "X" : "M";
-      status.textContent = audio.paused ? "Tap karo, song play ho jayega" : "Song play ho raha hai";
+      playBtn.classList.toggle("is-playing", !audio.paused);
+      muteBtn.classList.toggle("is-muted", audio.muted);
     }
 
     async function tryPlay() {
       try {
         await audio.play();
       } catch (error) {
-        status.textContent = "Browser ne autoplay roka hai, play dabao";
       }
       syncPlayer();
     }
